@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		{% include "attendence/head_content.html" %}
+		<title>{% block title %}Attendence Portal{% endblock %}</title>
+		<script>
+			$(function() {
+				$("[id^=id_date]").datepicker({
+					dateFormat: "yy-mm-dd"
+				});
+			});
+		</script>
+		<style>
+		    .errorlist {
+		        margin-bottom: .25rem;
+		        margin-left: 0px;
+		        padding-left: 0px;
+		        list-style: none;
+		    }
+		</style>
+		{% block custom_css %}{% endblock %}
+		{% block custom_js %}{% endblock %}
+	</head>
+	<body>
+		{% block navbar %}
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<a class="navbar-brand" href="{% url 'attendence:index' %}">Attendence Portal</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMarkup" aria-controls="navbarMarkup" aria-expanded="false" aria-label="Toggle Navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarMarkup">
+				<div class="navbar-nav mr-auto">
+					<a class="nav-item nav-link {% if view.navigation == 'kit' %}active{% endif %}" href="{% url 'attendence:semester-list' %}">Semesters</a>
+				</div>
+				{% block custom_navbar %}{% endblock %}
+			</div>
+		</nav>
+		{% endblock %}
+		<main>
+		{% block main_content %}{% endblock %}
+		</main>
+	</body>
+</html>

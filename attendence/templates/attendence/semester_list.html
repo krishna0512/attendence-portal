@@ -1,0 +1,12 @@
+{% extends 'attendence/base.html' %}
+{% load static %}
+
+{% block main_content %}
+<div class="container">
+    {% for semester in semester_list %}
+    {{ semester.id }}
+    {% empty %}
+    No semester found
+    {% endfor %}
+</div>
+{% endblock %}
