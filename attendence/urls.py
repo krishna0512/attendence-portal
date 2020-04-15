@@ -4,6 +4,8 @@ from attendence import views
 
 app_name = 'attendence'
 urlpatterns = [
-    path('index/', views.IndexTemplateView.as_view(), name='index'),
+    path('', views.IndexTemplateView.as_view(), name='index'),
+
     path('semester/', views.SemesterListView.as_view(), name='semester-list'),
+    path('semester/<int:pk>/view/', views.SemesterDetailView.as_view(), name='semester-detail'),
 ]

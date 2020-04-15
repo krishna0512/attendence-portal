@@ -86,3 +86,36 @@ class Semester(models.Model):
         default='active',
         max_length=30,
     )
+    def get_absolute_url(self):
+        return reverse('attendence:semester-detail', kwargs={'pk': self.pk})
+
+class Course(models.Model):
+    name = models.CharField(
+        max_length=100,
+        default='',
+    )
+    credit = models.PositiveIntegerField(
+        default=0,
+    )
+    semester = models.ForeignKey(
+        'Semester',
+        null=True,
+        on_delete=models.CASCADE,
+        related_name='courses',
+    )
+    date_start = models.DateField(
+        null=True,
+    )
+    date_end = models.DateField(
+        null=True,
+    )
+    faculty_primary = models.ForeignKey(
+        'Faculty',
+        null=True,
+        on_delete=models.CASCADE,
+        related_name='courses',
+    )
+    faculty_secondary = models.ManyToManyField(
+        'Faculty',
+        related_name='courses_secondary',
+    )

@@ -6,3 +6,4 @@ from attendence.models import *
 admin.site.register(Student)
 admin.site.register(Faculty)
 admin.site.register(Semester)
+admin.site.register(Course)
