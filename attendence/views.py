@@ -16,6 +16,14 @@ class IndexTemplateView(TemplateView):
 
 class SemesterListView(ListView):
     model = Semester
+    navigation = 'semester'
 
 class SemesterDetailView(DetailView):
     model = Semester
+
+class CourseDetailView(DetailView):
+    model = Course
+
+class CourseListView(ListView):
+    model = Course
+    navigation = 'course'

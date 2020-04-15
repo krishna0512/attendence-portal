@@ -3,6 +3,7 @@
 
 {% block main_content %}
 <div class="container">
+    <div class="h3">List of all Semesters</div>
     {% for semester in semester_list %}
     <a href="{{ semester.get_absolute_url }}">{{ semester.name }}</a>
     {% empty %}

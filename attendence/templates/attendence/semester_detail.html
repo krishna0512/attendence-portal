@@ -8,7 +8,7 @@
     <ul>
         Courses offered in This Semester:<br>
         {% for course in semester.courses.all %}
-        {{ course.name }}
+        <a href="{{ course.get_absolute_url }}">{{ course.name }}</a>
         {% empty %}
         No corses registered for this Semester
         {% endfor %}

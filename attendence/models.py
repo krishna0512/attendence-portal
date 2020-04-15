@@ -108,6 +108,17 @@ class Semester(models.Model):
         return self.name
 
 class Course(models.Model):
+    DAY_CHOICE = (
+        ('',''),
+        ('0','Monday'),
+        ('1','Tuesday'),
+        ('2','Wednesday'),
+        ('3','Thursday'),
+        ('4','Friday'),
+        ('5','Saturday'),
+        ('6','Sunday'),
+    )
+
     name = models.CharField(
         max_length=100,
         default='',
@@ -135,10 +146,26 @@ class Course(models.Model):
     )
     faculty_secondary = models.ManyToManyField(
         'Faculty',
-        null=True,
         blank=True,
         related_name='courses_secondary',
+    )
+    day1 = models.CharField(
+        choices=DAY_CHOICE,
+        max_length=10,
+        default='',
+        blank=True,
+        null=False,
+    )
+    day2 = models.CharField(
+        choices=DAY_CHOICE,
+        max_length=10,
+        default='',
+        blank=True,
+        null=False,
     )
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('attendence:course-detail', kwargs={'pk': self.pk})

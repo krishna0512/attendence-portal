@@ -1,0 +1,17 @@
+{% extends 'attendence/base.html' %}
+{% load static %}
+
+{% block main_content %}
+<div class="container">
+    Details for Course - {{ course.name }} ({{ course.semester.name }})<br>
+    Primary Faculty - {{ course.faculty_primary }}
+    <ul>
+        Secondary Faculty:<br>
+        {% for faculty in course.faculty_secondary.all %}
+        {{ faculty.name }}
+        {% empty %}
+        No Seconday Faculty
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

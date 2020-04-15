@@ -1,0 +1,13 @@
+{% extends 'attendence/base.html' %}
+{% load static %}
+
+{% block main_content %}
+<div class="container">
+    <div class="h3">List of all courses</div>
+    {% for course in course_list %}
+    <a href="{{ course.get_absolute_url }}">{{ course.name }}</a>
+    {% empty %}
+    No courses found
+    {% endfor %}
+</div>
+{% endblock %}
