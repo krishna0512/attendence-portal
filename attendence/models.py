@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse, reverse_lazy
+import datetime
 
 # Create your models here.
 
@@ -169,3 +170,22 @@ class Course(models.Model):
 
     def get_absolute_url(self):
         return reverse('attendence:course-detail', kwargs={'pk': self.pk})
+
+class CourseEntry(models.Model):
+    """Each entry in calender class contains  the record for a
+    course runned on a particular date
+    """
+    course = models.ForeignKey(
+        'Course',
+        null=False,
+        on_delete=models.CASCADE,
+        related_name='course_entries',
+    )
+    date = models.DateField(
+        default=datetime.date.today,
+    )
+    # TODO: modify to include the various statues in choices
+    status = models.CharField(
+        default='active',
+        max_length=30,
+    )
