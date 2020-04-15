@@ -34,6 +34,9 @@
 					<a class="nav-item nav-link {% if view.navigation == 'kit' %}active{% endif %}" href="{% url 'attendence:semester-list' %}">Semesters</a>
 				</div>
 				{% block custom_navbar %}{% endblock %}
+				<div class="navbar-nav">
+					<a class="btn btn-sm btn-outline-primary" href="{% url 'admin:index' %}">Admin</a>
+				</div>
 			</div>
 		</nav>
 		{% endblock %}

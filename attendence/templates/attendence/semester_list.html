@@ -4,7 +4,7 @@
 {% block main_content %}
 <div class="container">
     {% for semester in semester_list %}
-    {{ semester.id }}
+    <a href="{{ semester.get_absolute_url }}">{{ semester.name }}</a>
     {% empty %}
     No semester found
     {% endfor %}

@@ -3,10 +3,10 @@
 
 {% block main_content %}
 <div class="container">
-    Details for Semester - {{ semester.name }}
-    Year - {{ semester.academic_year }}
-    Courses offered in This Semester:
+    Details for Semester - {{ semester.name }}<br>
+    Year - {{ semester.academic_year }}<br><br>
     <ul>
+        Courses offered in This Semester:<br>
         {% for course in semester.courses.all %}
         {{ course.name }}
         {% empty %}

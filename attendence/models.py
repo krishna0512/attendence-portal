@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse, reverse_lazy
 
 # Create your models here.
 
@@ -8,6 +9,10 @@ class Student(models.Model):
         User,
         on_delete=models.CASCADE,
         related_name='profile_student',
+    )
+    name = models.CharField(
+        default='',
+        max_length=100,
     )
     roll_number = models.CharField(
         blank=False,
@@ -40,13 +45,20 @@ class Student(models.Model):
         max_length=30,
     )
 
+    def __str__(self):
+        return self.name
+
 class Faculty(models.Model):
     user = models.OneToOneField(
         User,
         on_delete=models.CASCADE,
         related_name='profile_faculty',
     )
-    fid = models.CharField(
+    name = models.CharField(
+        default='',
+        max_length=100,
+    )
+    faculty_id = models.CharField(
         blank=False,
         null=False,
         default='',
@@ -54,7 +66,7 @@ class Faculty(models.Model):
         unique=True,
         verbose_name='Faculty ID',
     )
-    dept = models.CharField(
+    department = models.CharField(
         blank=False,
         null=False,
         default='',
@@ -67,6 +79,9 @@ class Faculty(models.Model):
         default='active',
         max_length=30,
     )
+
+    def __str__(self):
+        return self.name
 
 class Semester(models.Model):
     name = models.CharField(
@@ -88,6 +103,9 @@ class Semester(models.Model):
     )
     def get_absolute_url(self):
         return reverse('attendence:semester-detail', kwargs={'pk': self.pk})
+
+    def __str__(self):
+        return self.name
 
 class Course(models.Model):
     name = models.CharField(
@@ -117,5 +135,10 @@ class Course(models.Model):
     )
     faculty_secondary = models.ManyToManyField(
         'Faculty',
+        null=True,
+        blank=True,
         related_name='courses_secondary',
     )
+
+    def __str__(self):
+        return self.name
