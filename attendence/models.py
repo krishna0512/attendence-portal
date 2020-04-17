@@ -6,42 +6,37 @@ import datetime
 # Create your models here.
 
 class Student(models.Model):
-    user = models.OneToOneField(
-        User,
-        on_delete=models.CASCADE,
-        related_name='profile_student',
-    )
+    # user = models.onetoonefield(
+    #     user,
+    #     on_delete=models.cascade,
+    #     related_name='profile_student',
+    # )
     name = models.CharField(
         default='',
         max_length=100,
     )
+    email = models.CharField(
+        default='',
+        max_length=100,
+    )
     roll_number = models.CharField(
-        blank=False,
-        null=False,
         default='',
         max_length=30,
         unique=True,
     )
     year_of_enrollment = models.IntegerField(
-        blank=False,
-        null=False,
         default=2020,
     )
     program = models.CharField(
-        blank=False,
-        null=False,
         default='BTech',
         max_length=30,
     )
     status = models.CharField(
         blank=True,
-        null=False,
         default='active',
         max_length=30,
     )
     gender = models.CharField(
-        blank=False,
-        null=False,
         default='male',
         max_length=30,
     )
@@ -53,36 +48,31 @@ class Faculty(models.Model):
     user = models.OneToOneField(
         User,
         on_delete=models.CASCADE,
-        related_name='profile_faculty',
+        related_name='profile',
     )
     name = models.CharField(
         default='',
         max_length=100,
     )
     faculty_id = models.CharField(
-        blank=False,
-        null=False,
         default='',
         max_length=30,
         unique=True,
         verbose_name='Faculty ID',
     )
     department = models.CharField(
-        blank=False,
-        null=False,
         default='',
         max_length=50,
         verbose_name='Department',
     )
     status = models.CharField(
         blank=True,
-        null=False,
         default='active',
         max_length=30,
     )
 
     def __str__(self):
-        return self.name
+        return '{} ({})'.format(self.name, self.faculty_id)
 
 class Semester(models.Model):
     name = models.CharField(
@@ -102,13 +92,21 @@ class Semester(models.Model):
         default='active',
         max_length=30,
     )
+    students_enrolled = models.ManyToManyField(
+        'Student',
+        blank=True,
+        related_name='semsters',
+    )
+
     def get_absolute_url(self):
         return reverse('attendence:semester-detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return self.name
 
-class Course(models.Model):
+class CourseDetail(models.Model):
+    """ This is equivalent for CourseMaster class.
+    """
     DAY_CHOICE = (
         ('',''),
         ('0','Monday'),
@@ -119,13 +117,52 @@ class Course(models.Model):
         ('5','Saturday'),
         ('6','Sunday'),
     )
+    TERM_CHOICES = (
+        ('',''),
+        ('spring','Spring'),
+        ('monsoon','Monsoon'),
+        ('summer','Summer'),
+    )
 
     name = models.CharField(
         max_length=100,
         default='',
     )
+    code = models.CharField(
+        max_length=20,
+        default='',
+        unique=True,
+    )
     credit = models.PositiveIntegerField(
         default=0,
+    )
+    term = models.CharField(
+        choices=TERM_CHOICES,
+        max_length=10,
+        default='',
+    )
+    day1 = models.CharField(
+        choices=DAY_CHOICE,
+        max_length=10,
+        default='',
+        blank=True,
+    )
+    day2 = models.CharField(
+        choices=DAY_CHOICE,
+        max_length=10,
+        default='',
+        blank=True,
+    )
+
+
+class Course(models.Model):
+    """ This is the equivalent class for CourseForSem.
+    """
+    course_detail = models.ForeignKey(
+        'CourseDetail',
+        null=True,
+        on_delete=models.CASCADE,
+        related_name='courses',
     )
     semester = models.ForeignKey(
         'Semester',
@@ -150,20 +187,6 @@ class Course(models.Model):
         blank=True,
         related_name='courses_secondary',
     )
-    day1 = models.CharField(
-        choices=DAY_CHOICE,
-        max_length=10,
-        default='',
-        blank=True,
-        null=False,
-    )
-    day2 = models.CharField(
-        choices=DAY_CHOICE,
-        max_length=10,
-        default='',
-        blank=True,
-        null=False,
-    )
 
     def __str__(self):
         return self.name
@@ -177,7 +200,6 @@ class CourseEntry(models.Model):
     """
     course = models.ForeignKey(
         'Course',
-        null=False,
         on_delete=models.CASCADE,
         related_name='course_entries',
     )
@@ -188,4 +210,10 @@ class CourseEntry(models.Model):
     status = models.CharField(
         default='active',
         max_length=30,
+    )
+    approved = models.BooleanField(default=False)
+    students_attended = models.ManyToManyField(
+        'Student',
+        blank=True,
+        related_name='course_entries',
     )
