@@ -5,7 +5,7 @@
 <div class="container">
     <div class="h3">List of all Students</div>
     {% for student in student_list %}
-    <a href="{{ student.get_absolte_url }}">{{ student.name }}</a>
+    <a href="{{ student.get_absolute_url }}">{{ student.name }}</a><br>
     {% empty %}
     No Students Registered
     {% endfor %}
