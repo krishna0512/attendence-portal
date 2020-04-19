@@ -1,0 +1,11 @@
+12345	NImisha Srivastava	nimisha.s@students.iiit.ac.in		2019	PGSSP	Active	xxxxx	F
+12346	Pushpa Yadav	pusha.yadav@students.iiit.ac.in		2019	PGSSP	Active	yyyyy	F
+12347	Gaurav Aswani	gaurav.aswani@students.iiit.ac.in		2017	DualDegree	Active	zzzzy	M
+12348	Ritabrata Podder	ritabrata.podder@students.iiit.ac.in		2020	PGSSP	Active	qqqqq	M
+12349	Sangram  Dash	sangram.dash@students.iiit.ac.in		2020	BTech	Active	wwww	M
+12350	Arshad Mohammed	arshad.mohammed@students.iiit.ac.in		2016	BTech	Active	eeeee	M
+12351	Rama Krishna	rama@gmail.com		2015	BTech	Dormant	yyyyy	M
+12352	Nim Sri	nimisha.srivastava@iiit.ac.in		2003	BTech	PassedOut	eeeee	F
+12353	Pushp Arya	pushpa.arya@gmail.com		2009	DualDegree	Active	iiiiiiii	F
+12354	Krishna T	Krishna.Tulsyan@research.iiit.ac.in		2015	DualDegree	Dormant	yyyyy	M
+12355	S Kumar	sk2100@yahoo.com		2018	BTech	Active	hhhhh	M

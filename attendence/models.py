@@ -45,6 +45,12 @@ class Student(models.Model):
         return self.name
 
 class Faculty(models.Model):
+    CATEGORY_CHOICES = (
+        ('',''),
+        ('fulltime','Full Time'),
+        ('parttime','Part Time'),
+        ('guest','Guest'),
+    )
     user = models.OneToOneField(
         User,
         on_delete=models.CASCADE,
@@ -60,11 +66,17 @@ class Faculty(models.Model):
         unique=True,
         verbose_name='Faculty ID',
     )
+    category = models.CharField(
+        choices=CATEGORY_CHOICES,
+        max_length=50,
+        default='',
+    )
     department = models.CharField(
         default='',
         max_length=50,
         verbose_name='Department',
     )
+    active = models.BooleanField(default=True)
     status = models.CharField(
         blank=True,
         default='active',
