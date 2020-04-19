@@ -14,6 +14,14 @@ from attendence.models import *
 class IndexTemplateView(TemplateView):
     template_name = 'attendence/index.html'
 
+class StudentListView(ListView):
+    model = Student
+    navigation = 'student'
+
+class StudentDetailView(DetailView):
+    model = Student
+    slug_field = 'roll_number'
+
 class SemesterListView(ListView):
     model = Semester
     navigation = 'semester'

@@ -44,6 +44,9 @@ class Student(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return reverse('attendence:student-detail', kwargs={'slug': self.roll_number})
+
 class Faculty(models.Model):
     CATEGORY_CHOICES = (
         ('',''),

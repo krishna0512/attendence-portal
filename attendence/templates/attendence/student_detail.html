@@ -1,0 +1,12 @@
+{% extends 'attendence/base.html' %}
+{% load static %}
+
+{% block main_content %}
+<div class="container">
+    Details for Student - {{ student.name }} ({{ student.roll_number }})<br>
+    year of enrollment = {{ student.year_of_enrollment }}<br>
+    program = {{ student.program }}<br>
+    status = {{ student.status }}<br>
+    gender = {{ student.gender }}<br>
+</div>
+{% endblock %}

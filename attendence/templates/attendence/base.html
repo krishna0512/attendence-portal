@@ -33,6 +33,7 @@
 				<div class="navbar-nav mr-auto">
 					<a class="nav-item nav-link {% if view.navigation == 'semester' %}active{% endif %}" href="{% url 'attendence:semester-list' %}">Semesters</a>
 					<a class="nav-item nav-link {% if view.navigation == 'course' %}active{% endif %}" href="{% url 'attendence:course-list' %}">Courses</a>
+					<a class="nav-item nav-link {% if view.navigation == 'student' %}active{% endif %}" href="{% url 'attendence:student-list' %}">Students</a>
 				</div>
 				{% block custom_navbar %}{% endblock %}
 				<div class="navbar-nav">
