@@ -18,6 +18,11 @@ class StudentListView(ListView):
     model = Student
     navigation = 'student'
 
+class StudentCreateView(CreateView):
+    model = Student
+    template_name_suffix = '_create_form'
+    fields = '__all__'
+
 class StudentDetailView(DetailView):
     model = Student
     slug_field = 'roll_number'

@@ -33,7 +33,7 @@ class Student(models.Model):
     )
     status = models.CharField(
         blank=True,
-        default='active',
+        default='Active',
         max_length=30,
     )
     gender = models.CharField(
@@ -82,7 +82,7 @@ class Faculty(models.Model):
     active = models.BooleanField(default=True)
     status = models.CharField(
         blank=True,
-        default='active',
+        default='Active',
         max_length=30,
     )
 
@@ -104,7 +104,7 @@ class Semester(models.Model):
         null=True,
     )
     status = models.CharField(
-        default='active',
+        default='Active',
         max_length=30,
     )
     students_enrolled = models.ManyToManyField(
@@ -223,7 +223,7 @@ class CourseEntry(models.Model):
     )
     # TODO: modify to include the various statues in choices
     status = models.CharField(
-        default='active',
+        default='Active',
         max_length=30,
     )
     approved = models.BooleanField(default=False)
