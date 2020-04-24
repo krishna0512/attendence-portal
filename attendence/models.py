@@ -169,6 +169,9 @@ class CourseDetail(models.Model):
         blank=True,
     )
 
+    def __str__(self):
+        return '{} ({})'.format(self.name, self.credit)
+
 
 class Course(models.Model):
     """ This is the equivalent class for CourseForSem.
@@ -191,6 +194,11 @@ class Course(models.Model):
     date_end = models.DateField(
         null=True,
     )
+    students = models.ManyToManyField(
+        'Student',
+        blank=True,
+        related_name='courses',
+    )
     faculty_primary = models.ForeignKey(
         'Faculty',
         null=True,
@@ -204,12 +212,19 @@ class Course(models.Model):
     )
 
     def __str__(self):
-        return self.name
+        if self.course_detail:
+            return self.course_detail.name
+        else:
+            return str(self.id)
+
+    @property
+    def name(self):
+        return self.course_detail.name
 
     def get_absolute_url(self):
         return reverse('attendence:course-detail', kwargs={'pk': self.pk})
 
-class CourseEntry(models.Model):
+class Class(models.Model):
     """Each entry in calender class contains  the record for a
     course runned on a particular date
     """

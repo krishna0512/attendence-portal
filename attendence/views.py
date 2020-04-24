@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import TemplateView, ListView, DetailView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.dates import MonthArchiveView, DayArchiveView
 from django.views.decorators.csrf import csrf_exempt
@@ -34,9 +35,14 @@ class SemesterListView(ListView):
 class SemesterDetailView(DetailView):
     model = Semester
 
-class CourseDetailView(DetailView):
+class CourseDetailView(LoginRequiredMixin, DetailView):
     model = Course
 
 class CourseListView(ListView):
     model = Course
     navigation = 'course'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.filter(faculty_primary__user=self.request.user)
+        return queryset

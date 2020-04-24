@@ -37,6 +37,12 @@
 				</div>
 				{% block custom_navbar %}{% endblock %}
 				<div class="navbar-nav">
+					{% if request.user.is_authenticated %}
+					<span class="mr-3">Hi, {{ request.user.profile.name }}</span>
+					<a class="btn btn-outline-danger btn-sm" href="{% url 'logout' %}">Logout</a>
+					{% else %}
+					<a class="btn btn-sm btn-outline-success" href="{% url 'login' %}">Login</a>
+					{% endif %}
 					<a class="btn btn-sm btn-outline-primary" href="{% url 'admin:index' %}">Admin</a>
 				</div>
 			</div>

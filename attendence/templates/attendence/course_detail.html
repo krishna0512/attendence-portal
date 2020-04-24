@@ -13,5 +13,14 @@
         No Seconday Faculty
         {% endfor %}
     </ul>
+    <br><br>
+    <ul>
+        Students Enrolled in this course
+        {% for student in course.students.all %}
+        <li>{{ student.name }}</li>
+        {% empty %}
+        <li>No Student Enrolled</li>
+        {% endfor %}
+    </ul>
 </div>
 {% endblock %}
